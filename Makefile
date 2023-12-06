@@ -6,3 +6,5 @@ publish:
 		npm publish --dry-run
 npm-link:
 		npm link
+lint:
+		npx eslint		
