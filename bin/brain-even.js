@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import { Congratulations, welcome, choice } from "../src/callback.js";
-import { name } from "../src/cli.js";
 function game() {
-  welcome()
+  welcome();
   console.log('Answer "yes" if the number is even, otherwise answer "no".');
   let win = 0;
   while (win !== 3) {
