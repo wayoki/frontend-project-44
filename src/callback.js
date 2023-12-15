@@ -1,5 +1,5 @@
 import readlineSync from 'readline-sync';
-import { name, getName } from "./cli.js";
+import { name, getName } from './cli.js';
 
 function welcome() {
   console.log('Welcome to the Brain Games!');

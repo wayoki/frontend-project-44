@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-import { Congratulations, welcome } from "../src/callback.js";
-import { answer, getAnswer } from "../src/cli.js";
+import { Congratulations, welcome } from '../src/callback.js';
+import { answer, getAnswer } from '../src/cli.js';
+
 function calc() {
   welcome();
   let count = 0;
@@ -14,25 +15,22 @@ function calc() {
     console.log(`Question: ${randomNumber1} ${randomSign} ${randomNumber2}`);
     getAnswer();
     if (randomSign === sign[0]) {
-      result = randomNumber1 + randomNumber2; 
-    }
-    else if (randomSign === sign[1]) {
+      result = randomNumber1 + randomNumber2;
+    } else if (randomSign === sign[1]) {
       result = randomNumber1 - randomNumber2;
-    }
-    else if (randomSign === sign[2]) {
+    } else if (randomSign === sign[2]) {
       result = randomNumber1 * randomNumber2;
     }
     if (Number(answer) === result) {
       console.log('Correct!');
       count += 1;
-    }
-    else {
+    } else {
       console.log(`'${answer}' is wrong answer ;(. Correct answer was '${result}'`);
-      break
+      break;
     }
   }
   if (count === 3) {
-  Congratulations();
+    Congratulations();
   }
 }
-calc()
+calc();

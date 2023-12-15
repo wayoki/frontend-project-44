@@ -13,4 +13,6 @@ publish:
 npm-link:
 		npm link
 lint:
-		npx eslint		
+		npx eslint .	
+lint-fix:
+	npm run lint-fix
