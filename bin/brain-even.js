@@ -12,9 +12,6 @@ function game() {
     if (task % 2 === 0 && yorn === 'yes') {
       console.log('Correct!');
       win += 1;
-    } else if (task % 2 === 0 && yorn !== 'yes') {
-      console.log(`'${yorn}' is wrong answer ;(. Correct answer was 'yes'`);
-      return null;
     }
 
     if (task % 2 === 1 && yorn === 'no') {
