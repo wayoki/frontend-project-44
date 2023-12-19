@@ -14,17 +14,15 @@ function nod() {
     getAnswer();
     while (result > 0) {
       if (randomNumber1 % result === 0 && randomNumber2 % result === 0) {
-        break
-      }
-      else {
+        break;
+      } else {
         result -= 1;
       }
     }
     if (Number(answer) === result) {
       console.log('Correct!');
       count += 1;
-    }
-    else {
+    } else {
       console.log(`'${answer}' is wrong answer ;(. Correct answer was '${result}'`);
       break;
     }
