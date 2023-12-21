@@ -5,24 +5,30 @@ import { Congratulations, welcome, choice } from '../src/cli.js';
 function game() {
   welcome();
   console.log('Answer "yes" if the number is even, otherwise answer "no".  ');
-  let win = 0;
-  while (win !== 3) {
+  let count = 0;
+  while (count !== 3) {
     const task = Math.floor(Math.random() * 100);
-    console.log(task);
+    console.log(`Question: ${task}`);
     const yorn = choice();
     if (task % 2 === 0 && yorn === 'yes') {
       console.log('Correct!');
-      win += 1;
+      count += 1;
     }
-
-    if (task % 2 === 1 && yorn === 'no') {
+    if (task % 2 !== 0 && yorn === 'no') {
       console.log('Correct!');
-      win += 1;
-    } else if (task % 2 === 1 && yorn !== 'no') {
+      count += 1;
+    }
+    if (task % 2 === 0 && yorn === 'no') {
+      console.log(`'${yorn}' is wrong answer ;(. Correct answer was 'yes'`);
+      break;
+    }
+    if (task % 2 !== 0 && yorn === 'yes') {
       console.log(`'${yorn}' is wrong answer ;(. Correct answer was 'no'`);
-      return null;
+      break;
     }
   }
-  Congratulations();
+  if (count === 3) {
+    Congratulations();
+  }
 }
 game();
