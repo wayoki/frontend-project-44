@@ -1,6 +1,7 @@
 #!/usr/bin/env node
-import { Congratulations, welcome } from '../src/callback.js';
-import { answer, getAnswer } from '../src/cli.js';
+import {
+  Congratulations, welcome, answer, getAnswer,
+} from '../src/cli.js';
 
 function calc() {
   welcome();

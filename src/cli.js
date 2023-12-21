@@ -1,13 +1,33 @@
 import readlineSync from 'readline-sync';
 
-export let name = '';
-export let answer = '';
+// eslint-disable-next-line import/no-mutable-exports
+let name = '';
+// eslint-disable-next-line import/no-mutable-exports
+let answer = '';
 
-export const getName = () => {
+function getName() {
   name = readlineSync.question('May I have your name? ');
   console.log(`Hello, ${name}!`);
-};
+}
 
-export const getAnswer = () => {
+function getAnswer() {
   answer = readlineSync.question('Your answer: ');
+}
+
+function welcome() {
+  console.log('Welcome to the Brain Games!');
+  getName(name);
+}
+
+function Congratulations() {
+  console.log(`Congratulations, ${name}!`);
+}
+
+function choice() {
+  const yorn = readlineSync.question('Your answer: ');
+  return yorn;
+}
+
+export {
+  welcome, Congratulations, choice, getName, getAnswer, name, answer,
 };

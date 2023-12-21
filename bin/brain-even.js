@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import { Congratulations, welcome, choice } from '../src/callback.js';
+/* eslint-disable consistent-return */
+import { Congratulations, welcome, choice } from '../src/cli.js';
 
 function game() {
   welcome();
