@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import {
-  answer, getAnswer, Congratulations, welcome,
+  answer, getAnswer, Congratulations, welcome, name,
 } from '../src/cli.js';
 
 function nod() {
@@ -24,7 +24,7 @@ function nod() {
       console.log('Correct!');
       count += 1;
     } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${result}'`);
+      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${result}'\nLet's try again, ${name}!`);
       break;
     }
   }

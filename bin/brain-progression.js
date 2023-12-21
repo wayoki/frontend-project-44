@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import {
-  answer, getAnswer, Congratulations, welcome,
+  answer, getAnswer, Congratulations, welcome, name,
 } from '../src/cli.js';
 
 function progression() {
@@ -8,12 +8,8 @@ function progression() {
   console.log('What number is missing in the progression?');
   let count = 0;
   for (let i = 0; i !== 3; i += 1) {
-    let randomNumber1 = Math.floor(Math.random() * 100);
-    let randomNumber2 = Math.floor(Math.random() * 10);
-    while (randomNumber1 === 0 && randomNumber2 === 0) {
-      randomNumber1 += Math.floor(Math.random() * 100);
-      randomNumber2 += Math.floor(Math.random() * 10);
-    }
+    const randomNumber1 = Math.floor(Math.random() * 100);
+    const randomNumber2 = Math.floor(Math.random() * 10);
     const progressionArr = [randomNumber1];
     let n = 0;
     while (progressionArr.length < 10) {
@@ -29,7 +25,7 @@ function progression() {
       console.log('Correct!');
       count += 1;
     } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${result}'`);
+      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${result}'\nLet's try again, ${name}!`);
       break;
     }
   }
