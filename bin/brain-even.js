@@ -4,7 +4,7 @@ import { Congratulations, welcome, choice } from '../src/cli.js';
 
 function game() {
   welcome();
-  console.log('Answer "yes" if the number is even, otherwise answer "no".');
+  console.log('Answer "yes" if the number is even, otherwise answer "no".  ');
   let win = 0;
   while (win !== 3) {
     const task = Math.floor(Math.random() * 100);
