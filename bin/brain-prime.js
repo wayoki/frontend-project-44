@@ -2,23 +2,27 @@
 import randomizeGenerator from '../src/randomNumbers.js';
 import startGame from '../src/startGame.js';
 
-const description = 'Find the greatest common divisor of given numbers.';
+const description = 'Answer "yes" if given number is prime. Otherwise answer "no".';
 
-const getAnswerAndQuestion = () => {
-  const num1 = randomizeGenerator() + 1;
-  const num2 = randomizeGenerator() + 1;
-  const question = `${num1} ${num2}`;
-  let rightAnswer = '';
-  for (let i = Math.min(num1, num2); i >= 0; i -= 1) {
-    if (num1 % i === 0 && num2 % i === 0) {
-      rightAnswer = String(i);
-      break;
+const isPrime = (num) => {
+  for (let i = 2; i < num; i += 1) {
+    if (num % i === 0) {
+      return false;
     }
   }
-  return [question, rightAnswer];
+  return true;
 };
 
-const brainGcd = () => {
+const getAnswerAndQuestion = () => {
+  const num = randomizeGenerator(2, 200);
+  const question = `${num}`;
+
+  const answerTrue = isPrime(num) ? 'yes' : 'no';
+
+  return [question, answerTrue];
+};
+
+const brainPrime = () => {
   startGame(description, getAnswerAndQuestion);
 };
-brainGcd();
+brainPrime();
