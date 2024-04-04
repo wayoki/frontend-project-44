@@ -1,38 +1,24 @@
 #!/usr/bin/env node
-import {
-  answer, getAnswer, Congratulations, welcome, name,
-} from '../src/cli.js';
+import randomizeGenerator from '../src/randomNumbers.js';
+import startGame from '../src/startGame.js';
 
-function prime() {
-  welcome();
-  let count = 0;
-  console.log('Answer "yes" if given number is prime. Otherwise answer "no".');
-  for (let i = 0; i !== 3; i += 1) {
-    let randomNumber = Math.floor(Math.random() * 100);
-    while (randomNumber === 0 && randomNumber === 1) {
-      randomNumber += Math.floor(Math.random() * 100);
-    }
-    let result;
-    for (let n = 2; n < randomNumber; n += 1) {
-      if (randomNumber % n === 0) {
-        result = 'no';
-        break;
-      } else {
-        result = 'yes';
-      }
-    }
-    console.log(`Question: ${randomNumber}`);
-    getAnswer();
-    if (answer === result) {
-      console.log('Correct!');
-      count += 1;
-    } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${result}'\nLet's try again, ${name}!`);
+const description = 'Find the greatest common divisor of given numbers.';
+
+const getAnswerAndQuestion = () => {
+  const num1 = randomizeGenerator() + 1;
+  const num2 = randomizeGenerator() + 1;
+  const question = `${num1} ${num2}`;
+  let rightAnswer = '';
+  for (let i = Math.min(num1, num2); i >= 0; i -= 1) {
+    if (num1 % i === 0 && num2 % i === 0) {
+      rightAnswer = String(i);
       break;
     }
   }
-  if (count === 3) {
-    Congratulations();
-  }
-}
-prime();
+  return [question, rightAnswer];
+};
+
+const brainGcd = () => {
+  startGame(description, getAnswerAndQuestion);
+};
+brainGcd();

@@ -1,36 +1,33 @@
 #!/usr/bin/env node
-import {
-  answer, getAnswer, Congratulations, welcome, name,
-} from '../src/cli.js';
+import startGame from '../src/startGame.js';
+import randomizeGenerator from '../src/randomNumbers.js';
 
-function progression() {
-  welcome();
-  console.log('What number is missing in the progression?');
-  let count = 0;
-  for (let i = 0; i !== 3; i += 1) {
-    const randomNumber1 = Math.floor(Math.random() * 100);
-    const randomNumber2 = Math.floor(Math.random() * 10);
-    const progressionArr = [randomNumber1];
-    let n = 0;
-    while (progressionArr.length < 10) {
-      progressionArr.push(progressionArr[n] + randomNumber2);
-      n += 1;
-    }
-    const randomNumber3 = Math.floor(Math.random() * 10);
-    const result = progressionArr[randomNumber3];
-    progressionArr[randomNumber3] = '..';
-    console.log(`Question: ${progressionArr.toString().replace(/[\s,%]/g, ' ')}`);
-    getAnswer();
-    if (Number(answer) === result) {
-      console.log('Correct!');
-      count += 1;
-    } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${result}'\nLet's try again, ${name}!`);
-      break;
-    }
+const description = 'What number is missing in the progression?';
+
+const getProgression = (size, startValue, progressionValue) => {
+  const arr = [startValue];
+  for (let j = 1; j < size; j += 1) {
+    arr.push(arr[j - 1] + progressionValue);
   }
-  if (count === 3) {
-    Congratulations();
-  }
-}
-progression();
+  return arr;
+};
+
+const getAnswerAndQuestion = () => {
+  const minLengthProgression = 5;
+  const sizeOfArray = minLengthProgression + randomizeGenerator(0, 6);
+  const missingElement = randomizeGenerator(0, sizeOfArray);
+  const startNumber = randomizeGenerator(0, 100);
+  const progressionMovement = randomizeGenerator(0, 100);
+
+  const array = getProgression(sizeOfArray, startNumber, progressionMovement);
+
+  const question = array[missingElement].toString();
+  array[missingElement] = '..';
+  const answer = array.join(' ');
+
+  return [answer, question];
+};
+const brainProgression = () => {
+  startGame(description, getAnswerAndQuestion);
+};
+brainProgression();

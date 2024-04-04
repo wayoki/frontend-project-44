@@ -1,35 +1,24 @@
 #!/usr/bin/env node
-import {
-  answer, getAnswer, Congratulations, welcome, name,
-} from '../src/cli.js';
+import randomizeGenerator from '../src/randomNumbers.js';
+import startGame from '../src/startGame.js';
 
-function nod() {
-  welcome();
-  let count = 0;
-  console.log('Find the greatest common divisor of given numbers.');
-  for (let i = 0; i !== 3; i += 1) {
-    const randomNumber1 = Math.floor(Math.random() * 100);
-    const randomNumber2 = Math.floor(Math.random() * 100);
-    let result = randomNumber1 > randomNumber2 ? randomNumber2 : randomNumber1;
-    console.log(`Question: ${randomNumber1} ${randomNumber2}`);
-    getAnswer();
-    while (result > 0) {
-      if (randomNumber1 % result === 0 && randomNumber2 % result === 0) {
-        break;
-      } else {
-        result -= 1;
-      }
-    }
-    if (Number(answer) === result) {
-      console.log('Correct!');
-      count += 1;
-    } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${result}'\nLet's try again, ${name}!`);
+const description = 'Find the greatest common divisor of given numbers.';
+
+const getAnswerAndQuestion = () => {
+  const num1 = randomizeGenerator() + 1;
+  const num2 = randomizeGenerator() + 1;
+  const question = `${num1} ${num2}`;
+  let rightAnswer = '';
+  for (let i = Math.min(num1, num2); i >= 0; i -= 1) {
+    if (num1 % i === 0 && num2 % i === 0) {
+      rightAnswer = String(i);
       break;
     }
   }
-  if (count === 3) {
-    Congratulations();
-  }
-}
-nod();
+  return [question, rightAnswer];
+};
+
+const brainGcd = () => {
+  startGame(description, getAnswerAndQuestion);
+};
+brainGcd();

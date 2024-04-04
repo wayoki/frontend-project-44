@@ -1,37 +1,38 @@
 #!/usr/bin/env node
-import {
-  Congratulations, welcome, answer, getAnswer, name,
-} from '../src/cli.js';
+import randomizeGenerator from '../src/randomNumbers.js';
+import startGame from '../src/startGame.js';
 
-function calc() {
-  welcome();
-  let count = 0;
-  console.log('What is the result of the expression?');
-  for (let i = 0; i !== 3; i += 1) {
-    const randomNumber1 = Math.floor(Math.random() * 100);
-    const randomNumber2 = Math.floor(Math.random() * 100);
-    const sign = ['+', '-', '*'];
-    const randomSign = sign[Math.floor(Math.random() * 3)];
-    let result = 0;
-    console.log(`Question: ${randomNumber1} ${randomSign} ${randomNumber2}`);
-    getAnswer();
-    if (randomSign === sign[0]) {
-      result = randomNumber1 + randomNumber2;
-    } else if (randomSign === sign[1]) {
-      result = randomNumber1 - randomNumber2;
-    } else if (randomSign === sign[2]) {
-      result = randomNumber1 * randomNumber2;
-    }
-    if (Number(answer) === result) {
-      console.log('Correct!');
-      count += 1;
-    } else {
-      console.log(`'${answer}' is wrong answer ;(. Correct answer was '${result}'\nLet's try again, ${name}!`);
+const description = 'What is the result of the expression?';
+const sign = ['+', '-', '*'];
+
+const result = (num1, num2, getRandomExample) => {
+  let expression = 0;
+  switch (getRandomExample) {
+    case '+':
+      expression = num1 + num2;
       break;
-    }
+    case '-':
+      expression = num1 - num2;
+      break;
+    case '*':
+      expression = num1 * num2;
+      break;
+    default:
   }
-  if (count === 3) {
-    Congratulations();
-  }
-}
-calc();
+  return expression;
+};
+
+const getAnswerAndQuestion = () => {
+  const getRandomExample = sign[Math.floor(Math.random() * sign.length)];
+  const num1 = randomizeGenerator(1, 10);
+  const num2 = randomizeGenerator(1, 10);
+  const question = `${num1} ${getRandomExample} ${num2}`;
+  const rightAnswer = String(result(num1, num2, getRandomExample));
+  return [question, rightAnswer];
+};
+
+const brainCalc = () => {
+  startGame(description, getAnswerAndQuestion);
+};
+
+brainCalc();

@@ -1,36 +1,18 @@
 #!/usr/bin/env node
-/* eslint-disable consistent-return */
-import {
-  Congratulations, welcome, choice, name,
-} from '../src/cli.js';
+import randomizeGenerator from '../src/randomNumbers.js';
+import startGame from '../src/startGame.js';
 
-function game() {
-  welcome();
-  console.log('Answer "yes" if the number is even, otherwise answer "no".');
-  let count = 0;
-  while (count !== 3) {
-    const task = Math.floor(Math.random() * 100);
-    console.log(`Question: ${task}`);
-    const yorn = choice();
-    if (task % 2 === 0 && yorn === 'yes') {
-      console.log('Correct!');
-      count += 1;
-    }
-    if (task % 2 !== 0 && yorn === 'no') {
-      console.log('Correct!');
-      count += 1;
-    }
-    if (task % 2 === 0 && yorn === 'no') {
-      console.log(`'${yorn}' is wrong answer ;(. Correct answer was 'yes'\nLet's try again, ${name}!`);
-      break;
-    }
-    if (task % 2 !== 0 && yorn === 'yes') {
-      console.log(`'${yorn}' is wrong answer ;(. Correct answer was 'no'\nLet's try again, ${name}!`);
-      break;
-    }
-  }
-  if (count === 3) {
-    Congratulations();
-  }
-}
-game();
+const description = 'Answer "yes" if the number is even, otherwise answer "no".';
+
+const isEven = (number) => number % 2 === 0;
+
+const getAnswerAndQuestion = () => {
+  const question = randomizeGenerator(1, 10);
+  const rightAnswer = isEven(question) ? 'yes' : 'no';
+  return [question, rightAnswer];
+};
+
+const brainEven = () => {
+  startGame(description, getAnswerAndQuestion);
+};
+brainEven();
