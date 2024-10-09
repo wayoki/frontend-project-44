@@ -1,6 +1,3 @@
-### Hexlet tests and linter status:
-[![Actions Status](https://github.com/ultraqqwave/frontend-project-44/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/ultraqqwave/frontend-project-44/actions)
-
 # The collection includes the following games:
 
 <ul>
